@@ -1,5 +1,5 @@
 name: AntiLog4J
-version: 0.1
+version: 0.2
 main: dev.mrblackreal.antilog4j.AntiLog4J
 prefix: 'Anti-Log4J'
 authors: [ MrBlackReal ]
