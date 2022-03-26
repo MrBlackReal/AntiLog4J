@@ -1,0 +1,8 @@
+name: AntiLog4J
+version: 0.1
+main: dev.mrblackreal.antilog4j.AntiLog4J
+prefix: 'Anti-Log4J'
+authors: [ MrBlackReal ]
+description: This plugin blocks any message that contains any kind of a Log4J vulnerability.
+website: mrblackreal.de
+
