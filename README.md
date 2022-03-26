@@ -3,7 +3,6 @@
 
 | Anti-Log4J                                                                                    |
 |-------------------------------------------------------------------------------------------------|
-| ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.openeye.net%2Fmedia%2F1060%2Flog4j.png) |
 
 ##Issues
 If you notice any bugs or missing features, you can let me know by joining [here](https://discord.gg/invite/Kx3PtwEzVJ).
