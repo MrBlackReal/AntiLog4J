@@ -10,7 +10,7 @@ If you notice any bugs or missing features, you can let me know by joining [here
 
 ## Additional libraries
 ### Spigot
-Spigot is a lib for Minecraft plugins if you want more information check out the [Documentation](https://hub.spigotmc.org/).
+Spigot is a lib to create Minecraft plugins if you want more information check out the [Documentation](https://hub.spigotmc.org/).
 
 ## License
 This project is subject to the [GNU General Public License v3.0](LICENSE). This does only apply for source code located directly in this clean repository. During the development and compilation process, additional source code may be used to which we have obtained no rights. Such code is not covered by the GPL license.
