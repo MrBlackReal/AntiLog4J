@@ -1,9 +1,6 @@
 # AntiLog4J
 [![State Of The Art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode)
 
-| Anti-Log4J                                                                                    |
-|-------------------------------------------------------------------------------------------------|
-
 ##Issues
 If you notice any bugs or missing features, you can let me know by joining [here](https://discord.gg/invite/Kx3PtwEzVJ).
 
