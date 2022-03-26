@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,45 @@ public class EventManager implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+
+        if (event.getMessage().contains("${jndi:ldap:")) {
+            if (antiLog4J.getConfigManager().replaceMessage || !(antiLog4J.getConfigManager().replacementMessage == null || antiLog4J.getConfigManager().replacementMessage.equals("")))  {
+                event.setMessage(antiLog4J.getConfigManager().replacementMessage);
+            } else {
+                event.setCancelled(true);
+            }
+
+            if (antiLog4J.getConfigManager().useWebHook)
+                WebHookUtil.sendMessage(antiLog4J.getConfigManager().webHookMessage.replace("{player}", player.getName()));
+
+            if (!exploiter.contains(player) && !antiLog4J.getConfigManager().saveUser)
+                exploiter.add(new Exploiter(player, TimeHelper.getDateAndTime(System.currentTimeMillis()), player.getAddress()));
+
+            if (antiLog4J.getConfigManager().closePlayerConn) {
+                Bukkit.getScheduler().runTask(antiLog4J, new Runnable() {
+                    @Override
+                    public void run() {
+                        type = antiLog4J.getConfigManager().closePlayerConnType;
+                        message = antiLog4J.getConfigManager().closePlayerConnMessage.replace("{player}", player.getName());
+
+                        if (type.equalsIgnoreCase("kick")) {
+                            player.kickPlayer(message);
+                        } else if (type.equalsIgnoreCase("ban")) {
+                            Bukkit.getBanList(BanList.Type.NAME).addBan(player.getName(), message, null, "AntiLog4J by MrBlackReal");
+                            player.kickPlayer(message);
+                        }
+
+                        message = null;
+                        type = null;
+                    }
+                });
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMsg(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
 
         if (event.getMessage().contains("${jndi:ldap:")) {
