@@ -1,7 +1,7 @@
 # AntiLog4J
 [![State-of-the-art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode)
 
-| #Anti-Log4J                                                                                    |
+| Anti-Log4J                                                                                    |
 |-------------------------------------------------------------------------------------------------|
 | ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.openeye.net%2Fmedia%2F1060%2Flog4j.png) |
 
