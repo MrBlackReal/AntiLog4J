@@ -3,6 +3,7 @@ package dev.mrblackreal.antilog4j;
 import dev.mrblackreal.antilog4j.event.EventManager;
 import dev.mrblackreal.antilog4j.util.file.ConfigManager;
 import dev.mrblackreal.antilog4j.util.file.FileManager;
+import dev.mrblackreal.antilog4j.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 
 public final class AntiLog4J extends JavaPlugin {
+
+    private final Logger logger = Logger.getInstance();
 
     private final ConfigManager configManager = new ConfigManager();
     public ConfigManager getConfigManager() {
@@ -37,17 +40,18 @@ public final class AntiLog4J extends JavaPlugin {
         }
 
         if (this.getConfigManager().saveUser) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
                 if (!EventManager.getExploiter().isEmpty()) {
                     try {
-                        System.out.println(" ");
-                        System.out.println(this.getName() + " >> Saving Exploiter...");
+                        if (this.getConfigManager().loggInConsole)
+                            logger.logConsole(this.getName() + " >> Saving Exploiter...");
                         fileManager.save();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        logger.logConsole("An error occurred while saving the Exploiters: " + e.getMessage());
                     }
-                    System.out.println(this.getName() + " >> Saved Exploiter!");
-                    System.out.println(" ");
+
+                    if (this.getConfigManager().loggInConsole)
+                        logger.logConsole(this.getName() + " >> Saved Exploiter!");
                 }
             },0L, configManager.saveDelay);
         }

@@ -4,6 +4,7 @@ import dev.mrblackreal.antilog4j.AntiLog4J;
 import dev.mrblackreal.antilog4j.util.Exploiter;
 import dev.mrblackreal.antilog4j.util.TimeHelper;
 import dev.mrblackreal.antilog4j.util.WebHookUtil;
+import dev.mrblackreal.antilog4j.util.logging.Logger;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -38,8 +39,19 @@ public class EventManager implements Listener {
             if (antiLog4J.getConfigManager().useWebHook)
                 WebHookUtil.sendMessage(antiLog4J.getConfigManager().webHookMessage.replace("{player}", player.getName()));
 
-            if (!exploiter.contains(player) && !antiLog4J.getConfigManager().saveUser)
+            if (!exploiter.contains(player) && antiLog4J.getConfigManager().saveUser) {
                 exploiter.add(new Exploiter(player, TimeHelper.getDateAndTime(System.currentTimeMillis()), player.getAddress()));
+
+                String message = "§4Added §c" + player.getName() + " §7(§c"+ player.getAddress().getAddress().toString().replace("/", "") +"§7) §4to the list of exploiters";
+
+                if (antiLog4J.getConfigManager().notify) {
+                    Logger.getInstance().logChat(message);
+                }
+
+                if (antiLog4J.getConfigManager().notifyConsole) {
+                    Logger.getInstance().logConsole(message);
+                }
+            }
 
             if (antiLog4J.getConfigManager().closePlayerConn) {
                 Bukkit.getScheduler().runTask(antiLog4J, new Runnable() {
@@ -77,8 +89,19 @@ public class EventManager implements Listener {
             if (antiLog4J.getConfigManager().useWebHook)
                 WebHookUtil.sendMessage(antiLog4J.getConfigManager().webHookMessage.replace("{player}", player.getName()));
 
-            if (!exploiter.contains(player) && !antiLog4J.getConfigManager().saveUser)
+            if (!exploiter.contains(player) && antiLog4J.getConfigManager().saveUser) {
                 exploiter.add(new Exploiter(player, TimeHelper.getDateAndTime(System.currentTimeMillis()), player.getAddress()));
+
+                String message = "§fAdded §c" + player.getName() + " §7(§c"+ player.getAddress().getAddress().toString().replace("/", "") +"§7) §fto the list of exploiters";
+
+                if (antiLog4J.getConfigManager().notify) {
+                    Logger.getInstance().logChat(message);
+                }
+
+                if (antiLog4J.getConfigManager().notifyConsole) {
+                    Logger.getInstance().logConsole(message);
+                }
+            }
 
             if (antiLog4J.getConfigManager().closePlayerConn) {
                 Bukkit.getScheduler().runTask(antiLog4J, new Runnable() {

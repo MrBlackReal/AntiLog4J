@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 
 public class FileManager {
 
-    private final File dir = new File("plugins/AntiLog4J/");
+    private final File dir = new File("plugins/AntiLog4J/saves");
     private final File dirLog4J = new File(dir, "log4j.json");
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();

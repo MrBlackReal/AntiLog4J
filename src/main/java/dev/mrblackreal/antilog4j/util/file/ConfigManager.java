@@ -16,12 +16,15 @@ public class ConfigManager {
     public String replacementMessage;
 
     //Saving
-    public boolean saveUser;
+    public boolean loggInConsole, saveUser;
     public Long saveDelay;
 
     //Kick
     public boolean closePlayerConn;
     public String closePlayerConnType, closePlayerConnMessage;
+
+    //Notify
+    public boolean notify, notifyConsole;
 
     private final File mainDir = new File("plugins/AntiLog4J");
     private final File config = new File(mainDir, "config.yml");
@@ -48,11 +51,15 @@ public class ConfigManager {
         replacementMessage = configuration.getString("AntiLog4J.Message.ReplaceMessage.Message");
 
         saveUser = configuration.getBoolean("AntiLog4J.Save.enabled");
+        loggInConsole = configuration.getBoolean("AntiLog4J.Save.logging");
         saveDelay = configuration.getLong("AntiLog4J.Save.Delay.Ticks");
 
         closePlayerConn = configuration.getBoolean("AntiLog4J.Player.CloseConnection.enabled");
         closePlayerConnType = configuration.getString("AntiLog4J.Player.CloseConnection.Type");
         closePlayerConnMessage = configuration.getString("AntiLog4J.Player.CloseConnection.Message");
+
+        notify = configuration.getBoolean("AntiLog4J.Notify.ops");
+        notifyConsole = configuration.getBoolean("AntiLog4J.Notify.console");
     }
 
     public void create() throws IOException {
@@ -64,11 +71,15 @@ public class ConfigManager {
         configuration.set("AntiLog4J.Message.ReplaceMessage.Message", "I just tried Log4J but the server cancelled me :(");
 
         configuration.set("AntiLog4J.Save.enabled", true);
+        configuration.set("AntiLog4J.Save.logging", false);
         configuration.set("AntiLog4J.Save.Delay.Ticks", 12000L);
 
         configuration.set("AntiLog4J.Player.CloseConnection.enabled", true);
         configuration.set("AntiLog4J.Player.CloseConnection.Type", "kick");
         configuration.set("AntiLog4J.Player.CloseConnection.Message", "§c{player} no Log4J in here my dude...");
+
+        configuration.set("AntiLog4J.Notify.ops", true);
+        configuration.set("AntiLog4J.Notify.console", true);
         save();
     }
 }
